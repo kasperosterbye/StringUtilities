@@ -15,8 +15,8 @@ The library also contains a small class StringBuilder. See [StringBuilder.md](St
 
 ```smalltalk
 Metacello new
-   baseline: 'StringSlice';
-   repository: 'github://kasperosterbye/StringSlice';
+   baseline: 'StringUtilities';
+   repository: 'github://kasperosterbye/StringUtilities';
    load.
 ```
 
