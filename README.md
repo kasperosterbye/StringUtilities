@@ -1,14 +1,16 @@
 # StringSlice
 
-A stringslice a substring obtained by a `start` and `end` index into an existing string. It is thus possible to get substrings without copying the bytes of the original string - at least for a large number of operations.
 
-The package adds one extra method to class String: the sliceFrom: a to: b. 
+A string slice a substring obtained by a `start` and an `end` index into an existing string. It is thus possible to get substrings without copying the bytes of the original string - at least for a large number of operations.
+
+The package adds one extra method to class String: the `sliceFrom: a to: b`. 
 
 ```smalltalk
-slice := 'aaabbbccc' sliceFrom: 4 to: 6.slice size >>> 3.(slice at: 2) >>> $b
+slice := 'aaabbbccc' sliceFrom: 4 to: 6.slice = 'bbb' >>> true.slice size >>> 3.(slice at: 2) >>> $b.slice hash = 'bbb' hash >>> true.
 ```
 
-The library also contains a small class StringBuilder. See [StringBuilder.md](StringBuilder.md).
+**This library also contains a [StringBuilder](StringBuilder.md)**
+
 
 ## Metacello call
 
