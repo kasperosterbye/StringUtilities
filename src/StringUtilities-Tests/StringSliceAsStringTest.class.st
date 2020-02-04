@@ -604,7 +604,7 @@ StringSliceAsStringTest >> testComparing [
 StringSliceAsStringTest >> testCopyEmptyMethod [
 	| result |
 	result := self collectionWithoutEqualElements copyEmpty.
-	self assert result isEmpty.
+	self assert: result isEmpty.
 ]
 
 { #category : #'tests - copy' }
