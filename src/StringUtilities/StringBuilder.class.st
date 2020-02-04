@@ -39,6 +39,11 @@ StringBuilder >> ,+ other [
 	^self
 ]
 
+{ #category : #'auto forwarding' }
+StringBuilder >> = arg [
+	^ self asString = arg
+]
+
 { #category : #converting }
 StringBuilder >> asString [
 	"Make me into a normals string"
