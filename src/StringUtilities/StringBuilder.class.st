@@ -5,10 +5,13 @@ I am really just an OrderedCollection of Strings and StringBuilders (yes, a tree
 
 To get the resulting string, the method #asString does that.
 
-I try to pretend compatible with String, so if you send me one of the string methods, I compute the string I currently represents, and forward the message to that string. To optimize, I compile the forwarding messages under the category 'auto forwarding'
+I try to pretend compatible with String, so if you send me one of the string methods, I compute the string I currently represents, and forward the message to that string. To optimize, I compile the forwarding messages under the category 'auto forwarding'.
 
-Time millisecondsToRun: [ |s| s := 'aaa'. 1000000 timesRepeat: [ s := s ++ 'bbb' ]. s := s asString ].
-Time millisecondsToRun: [ |s| s := 'aaa'. 10000 timesRepeat: [ s := s , 'bbb' ] ]. 
+On my macbook pro StringBuilder is around 100 times faster than concatenation, and around 4 times slower than the stream writing.
+
+Time millisecondsToRun: [ |s| s := 'aaa'. 1000000 timesRepeat: [ s := s ,+ 'bbb' ]. s := s asString ].
+Time millisecondsToRun: [ |s| s := 'aaa'. 10000 timesRepeat: [ s := s , 'bbb' ] ].
+Time millisecondsToRun: [ String streamContents: [ :s | 1000000 timesRepeat: [ s << 'bbb' ]]].
 "
 Class {
 	#name : #StringBuilder,
@@ -26,44 +29,20 @@ StringBuilder class >> initialize [
 
 { #category : #'instance creation' }
 StringBuilder class >> on: string [
-	^self new ++ string
+	^self new ,+ string
 ]
 
 { #category : #arithmetic }
-StringBuilder >> ++ other [
-	"other should be either a string or a ropestring"
+StringBuilder >> ,+ other [
+	"other should be either a string or a StringBuilder"
 	elements addLast: other.
 	^self
 ]
 
-{ #category : #'auto forwarding' }
-StringBuilder >> = arg [
-	^ self asString = arg
-]
-
 { #category : #converting }
 StringBuilder >> asString [
-	^ String streamContents: [ :s | self contentsOn:  s ]
-]
-
-{ #category : #'auto forwarding' }
-StringBuilder >> atAll: atAll [
-	^ self asString atAll: atAll
-]
-
-{ #category : #'auto forwarding' }
-StringBuilder >> beginsWith: beginsWith [
-	^ self asString beginsWith: beginsWith
-]
-
-{ #category : #converting }
-StringBuilder >> contentsOn: aStream [
-	elements do: [ :elem | elem contentsOn: aStream ]
-]
-
-{ #category : #'auto forwarding' }
-StringBuilder >> copyFrom: copyFrom to: to [
-	^ self asString copyFrom: copyFrom to: to
+	"Make me into a normals string"
+	^ String streamContents: [ :s | self stringBuilderContentsOn:  s ]
 ]
 
 { #category : #'reflective operations' }
@@ -86,24 +65,19 @@ StringBuilder >> initialize [
 	elements := OrderedCollection new
 ]
 
-{ #category : #'auto forwarding' }
-StringBuilder >> isString [
-	^ self asString isString
-]
-
 { #category : #printing }
 StringBuilder >> printOn: aStream [
 	aStream nextPut: $'.
-	elements do: [ :elem | elem contentsOn: aStream ].
+	elements do: [ :elem | elem stringBuilderContentsOn: aStream ].
 	aStream nextPut: $'
-]
-
-{ #category : #'auto forwarding' }
-StringBuilder >> printString [
-	^ self asString printString
 ]
 
 { #category : #accessing }
 StringBuilder >> size [
 	^ elements inject: 0 into: [ :sofar :elem | sofar + elem size ]
+]
+
+{ #category : #converting }
+StringBuilder >> stringBuilderContentsOn: aStream [
+	elements do: [ :elem | elem stringBuilderContentsOn: aStream ]
 ]
