@@ -384,7 +384,7 @@ StringSliceAsStringTest >> sizeCollection [
 	^ self sliceFor: 'abcd'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'helper methods' }
 StringSliceAsStringTest >> sliceFor: aString [
 	^ StringSlice sliceOf: ('ww',aString,'qq') from: 3 to: aString size + 2
 ]
@@ -600,7 +600,7 @@ StringSliceAsStringTest >> testComparing [
 	self assert: (self sliceFor: 'foo') <= (self sliceFor: 'foo:').
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - copy' }
 StringSliceAsStringTest >> testCopyEmptyMethod [
 	| result |
 	result := self collectionWithoutEqualElements copyEmpty.

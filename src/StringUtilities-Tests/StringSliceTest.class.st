@@ -7,7 +7,7 @@ Class {
 	#category : #'StringUtilities-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'helper methods' }
 StringSliceTest >> sliceFor: aString [
 	^ StringSlice sliceOf: ('ww',aString,'qq') from: 3 to: aString size + 2
 ]
