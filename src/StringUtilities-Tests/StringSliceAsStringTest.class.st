@@ -494,7 +494,7 @@ StringSliceAsStringTest >> testAsSmalltalkComment [
 		do: [ :s | 
 			| tokens |
 			tokens := s asComment parseLiterals.
-			self assertEmpty: tokens ].
+			self assert: tokens isEmpty].
 
 	"check that the result has the same non-quote characters as the original"
 	exampleStrings do: [ :s | self assert: (s copyWithout: $") equals: (s asComment copyWithout: $") ].
@@ -604,7 +604,7 @@ StringSliceAsStringTest >> testComparing [
 StringSliceAsStringTest >> testCopyEmptyMethod [
 	| result |
 	result := self collectionWithoutEqualElements copyEmpty.
-	self assertEmpty: result.
+	self assert: result isEmpty.
 ]
 
 { #category : #'tests - copy' }
