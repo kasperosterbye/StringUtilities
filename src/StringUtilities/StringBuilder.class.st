@@ -22,42 +22,28 @@ Class {
 	#category : #StringUtilities
 }
 
-{ #category : #initialization }
-StringBuilder class >> initialize [
-	self removeProtocol: 'auto forwarding'
-]
-
 { #category : #'instance creation' }
 StringBuilder class >> on: string [
-	^self new ,+ string
+	^self new << string
 ]
 
-{ #category : #arithmetic }
-StringBuilder >> ,+ other [
+{ #category : #accessing }
+StringBuilder >> << other [
 	"other should be either a string or a StringBuilder"
 	elements addLast: other.
 	^self
 ]
 
 { #category : #converting }
-StringBuilder >> asString [
+StringBuilder >> contents [
 	"Make me into a normals string"
 	^ String streamContents: [ :s | self stringBuilderContentsOn:  s ]
 ]
 
-{ #category : #'reflective operations' }
-StringBuilder >> doesNotUnderstand: aMessage [
-	| methodHeader |
-	methodHeader := aMessage selector isUnary
-		ifTrue: [ aMessage selector]
-		ifFalse: [ aMessage selector isBinary
-			ifTrue: [ aMessage selector, ' arg' ]
-			ifFalse: [ (aMessage selector keywords 
-				collect: [ :kw | kw, ' ', (kw copyUpTo: $:)  ]) joinUsing: ' ' ] ].
-	self class 
-		compile: methodHeader, String cr, '	^ self asString ', methodHeader 
-		classified: 'auto forwarding'.
-	^ aMessage sendTo: self asString
+{ #category : #'stop conditions' }
+StringBuilder >> cr [
+	elements addLast: String cr.
+	^ self
 ]
 
 { #category : #initialization }

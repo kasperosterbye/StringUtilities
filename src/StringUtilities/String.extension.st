@@ -1,9 +1,9 @@
 Extension { #name : #String }
 
 { #category : #'*StringUtilities' }
-String >> ,+ other [
+String >> << other [
 	"other should be either a string or a StringBuilder"
-	^(StringBuilder on: self) ,+ other
+	^(StringBuilder on: self) << other
 ]
 
 { #category : #'*StringUtilities' }

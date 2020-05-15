@@ -10,19 +10,19 @@ Class {
 { #category : #tests }
 StringBuilderTest >> testStringOperationsStillWorks [
 	| xxx |
-	xxx := 'aaa' ,+ 'bbb'.
+	xxx := ('aaa' << 'bbb') contents.
 	
 	self assert: (xxx beginsWith: 'aaab').
 	self assert: (xxx atAll: (3 to: 5)) equals: 'abb'.
-	self assert: ((xxx atAll: (3 to: 5)) ,+ 'ccc') equals: 'abbccc'
+	self assert: ((xxx atAll: (3 to: 5)) << 'ccc') contents equals: 'abbccc'
 ]
 
 { #category : #tests }
 StringBuilderTest >> testStringToStringBuiderAndBack [
 	| x |
-	x := 'aaa' ,+ 'bbb'.
+	x := ('aaa' << 'bbb') .
 	
 	self assert: x class equals: StringBuilder.
-	self assert: x asString equals: 'aaabbb'.
+	self assert: x contents equals: 'aaabbb'.
 	self assert: x printString equals: '''aaabbb'''
 ]
