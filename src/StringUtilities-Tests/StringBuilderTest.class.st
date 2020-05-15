@@ -11,7 +11,7 @@ Class {
 StringBuilderTest >> testCR [
 	|str|
 	str := ( 'aaa' << 'bbb') cr << 'ccc'.
-	self assert: str contents equals: 'aaabbb\ccc' withCRs. 
+	self assert: str contents equals: 'aaabbb\ccc' withCRs.
 ]
 
 { #category : #tests }
