@@ -15,7 +15,7 @@ Time millisecondsToRun: [ String streamContents: [ :s | 1000000 timesRepeat: [ s
 "
 Class {
 	#name : #StringBuilder,
-	#superclass : #ProtoObject,
+	#superclass : #Object,
 	#instVars : [
 		'elements'
 	],

@@ -15,5 +15,6 @@ BaselineOfStringUtilities >> baseline: spec [
 	
 	spec for: #'common' do: [
 		spec 
-			package: 'StringUtilities' ]
+			package: 'StringUtilities';
+			package: 'StringUtilities-Tests' ]
 ]
