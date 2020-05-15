@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #tests }
+StringBuilderTest >> testCR [
+	|str|
+	str := ( 'aaa' << 'bbb') cr << 'ccc'.
+	self assert: str contents equals: 'aaabbb\ccc' withCRs.
+]
+
+{ #category : #tests }
 StringBuilderTest >> testNestedBuild [
 	| str | 
 	str := 'aaa' << ('bbb' << 'ccc') << 'ddd'.
