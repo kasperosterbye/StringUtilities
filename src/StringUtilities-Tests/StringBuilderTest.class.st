@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #tests }
+StringBuilderTest >> testNestedBuild [
+	| str | 
+	str := 'aaa' << ('bbb' << 'ccc') << 'ddd'.
+	self assert: str size equals: 12.
+	self assert: str contents equals: 'aaabbbcccddd'
+]
+
+{ #category : #tests }
 StringBuilderTest >> testStringOperationsStillWorks [
 	| xxx |
 	xxx := ('aaa' << 'bbb') contents.
